@@ -22,6 +22,7 @@ export default (sequelize) => {
     },
     {
       tableName: "instituicao",
+      timestamps: false,
     },
   );
 };

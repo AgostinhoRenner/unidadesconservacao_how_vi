@@ -23,5 +23,5 @@ Instituicao.hasMany(UnidadeConservacao, { foreignKey: "instituicao_id" });
 UnidadeConservacao.belongsToMany(Municipio, { through: UnidadeMunicipio, foreignKey: "unidade_id" });
 Municipio.belongsToMany(UnidadeConservacao, { through: UnidadeMunicipio, foreignKey: "municipio_id" });
 
-db.sync({alter: true});
+// db.sync({alter: true});
 export { db, Comunicacao, Instituicao, UnidadeConservacao, Municipio };

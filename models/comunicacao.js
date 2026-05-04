@@ -42,6 +42,7 @@ export default (sequelize) => {
     },
     {
       tableName: "comunicacao",
+      timestamps: false,
     },
   );
 };

@@ -37,6 +37,7 @@ export default (sequelize) => {
     },
     {
       tableName: "unidade_conservacao",
+      timestamps: false,
     },
   );
 };

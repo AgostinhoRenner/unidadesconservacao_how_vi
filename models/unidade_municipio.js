@@ -29,6 +29,7 @@ export default (sequelize) => {
     },
     {
       tableName: "unidade_municipio",
+      timestamps: false,
     },
   );
 };

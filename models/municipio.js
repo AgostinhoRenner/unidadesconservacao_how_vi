@@ -21,6 +21,7 @@ export default (sequelize) => {
     },
     {
       tableName: "municipio",
+      timestamps: false,
     },
   );
 };
