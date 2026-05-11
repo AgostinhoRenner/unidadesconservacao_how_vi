@@ -7,26 +7,37 @@
 </head>
 <body>
     <h1>Unidades de Conservação</h1>
+
+    <button id="btn-abrir">Nova Comunicação</button>
+
+    <div id="modal-overlay">
+        <div id="modal-box">
+            <button id="btn-fechar">x</button>
+            <h2>Nova Comunicação</h2>
+            <form id="form-comunicacao">
+
+                <label>Unidade de Conservação</label>
+                <select name="unidade_id" required></select>
+
+                <label>Título</label>
+                <input type="text" name="titulo" required />
+
+                <label>Descrição</label>
+                <textarea name="descricao" required></textarea>
+
+                <input type="hidden" name="data_hora" />
+
+                <label>Email</label>
+                <input type="email" name="email" required />
+
+                <button type="submit">Enviar</button>
+        </form>
+        <p id="msg-sucesso"></p>
+        </div>
+    </div>
+
     <ul id="lista"></ul>
 
-<script>
-
-    async function carregarUnidades() {
-        const resposta = await fetch('/unidades/');
-        const dados    = await resposta.json();
-        
-        const lista = document.getElementById('lista');
-        lista.innerHTML = dados.map(uc => `
-            <li>
-                <strong>${uc.unidade_nome}</strong> — ${uc.instituicao_nome}
-                <p>${uc.descricao}</p>
-                <small>${new Date(uc.data_criacao).toLocaleDateString("pt-BR")}</small> 
-            </li>
-        `).join('');
-    }
-    
-    carregarUnidades();
-
-</script>
+<script src="/ucs.js"></script>
 </body>
 </html>

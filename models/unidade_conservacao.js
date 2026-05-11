@@ -35,6 +35,7 @@ export default class UnidadeConservacao {
   async getAllUnidadesConservacao() {
     const [rows, fields] = await this.mysqlConnection.promise().query(
       `SELECT 
+        uc.id,
         uc.nome as unidade_nome,
         uc.data_criacao,
         uc.descricao,

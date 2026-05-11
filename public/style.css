@@ -46,3 +46,79 @@ li small {
     margin-top: 0.4rem;
     color: #888;
 }
+
+#btn-abrir {
+    background: #2d5a27;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+}
+
+#modal-overlay {
+    display:none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+#modal-box {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+#btn-fechar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#form-comunicacao {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+#form-comunicacao input,
+#form-comunicacao select,
+#form-comunicacao textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#form-comunicacao textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+#form-comunicacao button[type="submit"] {
+    background: #2d5a27;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#msg-sucesso {
+    margin-top: 1rem;
+    color: #2d5a27;
+    font-weight: bold;
+}
