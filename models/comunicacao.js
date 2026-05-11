@@ -34,6 +34,26 @@ export default class Comunicacao {
     );
   }
 
+  async getAllComunicacao(id = undefined) {
+    if (!id || typeof id !== "number") throw new Error("Necessário informar um Id numérico para buscar o Município");
+
+    const [rows, fields] = await this.mysqlConnection.promise().query(
+      `SELECT 
+        c.id,
+        c.titulo,
+        c.descricao, 
+        c.data_hora, 
+        c.email, 
+        c.status, 
+        uc.id as unidade_id,
+        uc.nome as unidade_nome
+      FROM comunicacao c
+      INNER JOIN unidade_conservacao uc
+        ON c.unidade_id = uc.id`
+    );
+    return rows;
+  }
+
   async getComunicacao(id = undefined) {
     if (!id || typeof id !== "number") throw new Error("Necessário informar um Id numérico para buscar o Município");
 
