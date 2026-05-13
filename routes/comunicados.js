@@ -6,8 +6,8 @@ import Comunicacao from "../models/comunicacao.js";
 
 comunicadosRouter.get("/", async (req, res) => {
   try {
-    await new Comunicacao(mysqlConnection).getAllComunicacao();
-    res.status(201).end();
+    const data =await new Comunicacao(mysqlConnection).getAllComunicacao();
+    res.json(data);
   } catch (error) {
     console.log(error);
     res.status(500).send("Ocorreu um erro durante o processamento, tente novamente");

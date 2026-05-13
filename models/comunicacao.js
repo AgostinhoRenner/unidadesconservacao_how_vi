@@ -34,10 +34,8 @@ export default class Comunicacao {
     );
   }
 
-  async getAllComunicacao(id = undefined) {
-    if (!id || typeof id !== "number") throw new Error("Necessário informar um Id numérico para buscar o Município");
-
-    const [rows, fields] = await this.mysqlConnection.promise().query(
+  async getAllComunicacao() {
+    const [rows] = await this.mysqlConnection.promise().query(
       `SELECT 
         c.id,
         c.titulo,
