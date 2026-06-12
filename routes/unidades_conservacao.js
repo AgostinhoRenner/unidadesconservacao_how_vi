@@ -12,9 +12,13 @@ ucRouter.get("/:id", async (req, res) => {
     return res.status(400).json({ erro: "Id inválido" });
   }
   try {
-    const data = await new UnidadeConservacao(mysqlConnection).getUnidadeConservacao(id);
-    if (data.length === 0) return res.status(404).json({ erro: "UC não encontrada" });
-    return res.json(data[0]);
+    const rows = await new UnidadeConservacao(mysqlConnection).getUnidadeConservacao(id);
+    if (rows.length === 0) return res.status(404).json({ erro: "UC não encontrada" });
+
+    const { unidade_nome, data_criacao, descricao, imagem_url, instituicao_nome, email } = rows[0];
+    const municipios = rows.map(r => ({ nome: r.municipio_nome, estado: r.municipio_estado }));
+
+    return res.json({ unidade_nome, data_criacao, descricao, imagem_url, instituicao_nome, email, municipios });
   } catch (err) {
     return res.status(500).json({ erro: err.message });
   }

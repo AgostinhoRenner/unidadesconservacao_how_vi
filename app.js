@@ -10,3 +10,4 @@ app.use(express.json());
 app.use(router);
 
 app.listen(3000);
+console.log("Server is running on localhost:3000");

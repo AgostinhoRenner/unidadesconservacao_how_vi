@@ -1,29 +1,73 @@
-async function carregarUnidade() {
-  try {
-    // Substitua pela URL real da sua rota no Express
-    const resposta = await fetch("http://localhost:3000/unidades/1");
-    const unidade = await resposta.json();
+async function carregarUnidades() {
+    const resposta = await fetch('/unidades/');
+    const dados    = await resposta.json();
+    
+    const lista = document.getElementById('lista');
+    lista.innerHTML = dados.map(uc => `
+        <li>
+            <a href="/uc.html?id=${uc.id}"><strong>${uc.unidade_nome}</strong></a> — ${uc.instituicao_nome}
+            <p>${uc.descricao}</p>
+            <small>${new Date(uc.data_criacao).toLocaleDateString("pt-BR")}</small>
+        </li>
+    `).join('');
+}
+    
+carregarUnidades();
 
-    // 1. Inserindo o Nome no H1
-    document.getElementById("unidade-nome").textContent = unidade.nome;
+const overlay = document.getElementById('modal-overlay');
 
-    // 2. Formatando e inserindo a Data
-    // O valor '2007-03-24' vira algo mais legível
-    const dataFormatada = new Date(unidade.data_criacao).toLocaleDateString("pt-BR");
-    document.getElementById("unidade-data").textContent = dataFormatada;
+document.getElementById('btn-abrir').addEventListener('click', () => {
+    overlay.style.display = 'block';
+    carregarSelect();
+});
 
-    // 3. Inserindo a Descrição no P
-    document.getElementById("unidade-descricao").textContent = unidade.descricao;
+document.getElementById('btn-fechar').addEventListener('click', () => {
+    overlay.style.display = 'none';
+});
 
-    // 4. Mudando o SRC da Imagem
-    // Se suas imagens estiverem em uma pasta public/img, adicione o caminho
-    document.getElementById("unidade-img").src = unidade.imagem_url;
-    document.getElementById("unidade-img").alt = unidade.nome;
-  } catch (error) {
-    console.error("Erro ao buscar dados:", error);
-    document.getElementById("unidade-nome").textContent = "Erro ao carregar unidade.";
-  }
+overlay.addEventListener('click', (evento) => {
+    if (evento.target === overlay) {
+    overlay.style.display = 'none';
+    }
+});
+
+async function carregarSelect() {
+    const resposta = await fetch('/unidades/');
+    const ucs = await resposta.json();
+
+    const select = document.querySelector('#form-comunicacao select');
+    select.innerHTML = ucs.map(uc =>
+        `<option value="${uc.id}">${uc.unidade_nome}</option>`
+    ).join('');
 }
 
-// Chama a função ao carregar a página
-carregarUnidade();
+const idUnidade = new URLSearchParams(window.location.search).get('id');
+if (idUnidade) {
+    overlay.style.display = 'block';
+    carregarSelect().then(() => {
+        document.querySelector('#form-comunicacao select').value = idUnidade;
+    });
+}
+
+document.getElementById('form-comunicacao').addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    const form = evento.target;
+    form.querySelector('[name="data_hora"]').value = new Date().toISOString().slice(0,16);
+    const dados = Object.fromEntries(new FormData(form));
+
+    const resposta = await fetch('/comunicado/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados),
+    });
+
+    if (resposta.ok) {
+        const msg = document.getElementById('msg-sucesso');
+        msg.textContent = 'Comunicação enviada com sucesso!';
+        form.reset();
+        setTimeout(() => {
+            msg.textContent = '';
+            overlay.style.display = 'none';
+        }, 2500);
+    }
+});

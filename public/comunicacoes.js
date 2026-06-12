@@ -11,14 +11,15 @@ function renderComunicacoes(dados) {
 
     dados.forEach(c => {
         const item      = document.createElement('li');
-        const titulo    = document.createElement('strong')
+        const titulo    = document.createElement('a')
         const status    = document.createElement('span');
         const unidade   = document.createElement('p');
         const descricao = document.createElement('p');
         const data      = document.createElement('small');
 
+        titulo.href = `/comunicacao.html?id=${c.id}`;
         titulo.textContent = c.titulo;
-        status.textContent = c.status === 0 ? 'Pendente' : 'Resolvido';
+        status.textContent = c.status === 0 ? 'Em Análise' : 'Analisada';
         status.className = c.status === 0 ? 'status pendente' : 'status resolvido';
         unidade.className = 'unidade';
         unidade.textContent = c.unidade_nome;
@@ -33,6 +34,7 @@ function renderComunicacoes(dados) {
 async function carregarDados() {
     const lista = document.getElementById('lista');
     const filtro = document.getElementById('filtro-uc');
+    const id = new URLSearchParams(window.location.search).get('id');
 
     try {
         const [resUcs, resComunicacoes] = await Promise.all([
@@ -55,7 +57,14 @@ async function carregarDados() {
             filtro.appendChild(option);
         });
 
-        renderComunicacoes(todasComunicacoes);
+        if (id) {
+            filtro.value = id;
+        }
+
+        const inicial = id
+            ? todasComunicacoes.filter(c => c.unidade_id === Number(id))
+            : todasComunicacoes;
+        renderComunicacoes(inicial);
 
         filtro.addEventListener('change', () => {
             const ucId = Number(filtro.value);

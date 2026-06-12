@@ -54,16 +54,22 @@ export default class UnidadeConservacao {
       throw new Error("Necessário informar um Id numérico para buscar Unidade de Conservacao");
 
     const [rows, fields] = await this.mysqlConnection.promise().query(
-      `SELECT 
+      `SELECT
         uc.nome as unidade_nome,
         uc.data_criacao,
         uc.descricao,
         uc.imagem_url,
         i.nome as instituicao_nome,
-        i.email
+        i.email,
+        m.nome as municipio_nome,
+        m.estado as municipio_estado
       FROM unidade_conservacao uc
       INNER JOIN instituicao i
         ON uc.instituicao_id = i.id
+      INNER JOIN unidade_municipio um
+        ON uc.id = um.unidade_id
+      INNER JOIN municipio m
+        ON um.municipio_id = m.id
       WHERE uc.id = ?`,
       [id],
     );

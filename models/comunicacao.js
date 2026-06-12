@@ -47,7 +47,8 @@ export default class Comunicacao {
         uc.nome as unidade_nome
       FROM comunicacao c
       INNER JOIN unidade_conservacao uc
-        ON c.unidade_id = uc.id`
+        ON c.unidade_id = uc.id
+      ORDER BY c.data_hora DESC`
     );
     return rows;
   }
@@ -62,10 +63,13 @@ export default class Comunicacao {
         c.data_hora, 
         c.email, 
         c.status, 
-        uc.nome as unidade_nome
+        uc.nome as unidade_nome,
+        i.nome as instituicao_nome
       FROM comunicacao c
       INNER JOIN unidade_conservacao uc
         ON c.unidade_id = uc.id
+      INNER JOIN instituicao i
+        ON uc.instituicao_id = i.id
       WHERE c.id = ?`,
       [id],
     );

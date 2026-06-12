@@ -1,0 +1,7 @@
+{
+  "name": "UC HOW VI",
+  "image": "node:24-alpine",
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm install",
+  "runArgs": ["--network=dev-network"]
+}
