@@ -1,22 +1,55 @@
 <!doctype html>
-<html lang="en">
-  <head>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./index.js" defer></script>
+    <title>Unidades de Conservação</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">🌿 ConservaSC</a>
+        <div class="nav-links">
+            <a href="/">Unidades</a>
+            <a href="/comunicacoes.html">Comunicações</a>
+        </div>
+    </nav>
 
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="card-unidade">
-      <img id="unidade-img" src="" alt="Imagem da Unidade" style="width: 300px" />
-      <h1 id="unidade-nome">Carregando...</h1>
-      <div>
-        <strong>Data de Criação:</strong>
-        <span id="unidade-data"></span>
-      </div>
+    <h1>Unidades de Conservação</h1>
 
-      <p id="unidade-descricao"></p>
+    <button id="btn-abrir">Nova Comunicação</button>
+
+    <div id="modal-overlay">
+        <div id="modal-box">
+            <button id="btn-fechar">x</button>
+            <h2>Nova Comunicação</h2>
+            <form id="form-comunicacao">
+
+                <label>Unidade de Conservação</label>
+                <select name="unidade_id" required></select>
+
+                <label>Título</label>
+                <input type="text" name="titulo" required />
+
+                <label>Descrição</label>
+                <textarea name="descricao" required></textarea>
+
+                <input type="hidden" name="data_hora" />
+
+                <label>Email</label>
+                <input type="email" name="email" required />
+
+                <button type="submit">Enviar</button>
+        </form>
+        <p id="msg-sucesso"></p>
+        </div>
     </div>
-  </body>
+
+    <ul id="lista"></ul>
+
+    <footer>
+        <p>ConservaSC — Projeto acadêmico HOW VI, ADS UNIVALI</p>
+    </footer>
+
+<script src="/index.js"></script>
+</body>
 </html>

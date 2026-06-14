@@ -37,10 +37,15 @@ unidades_conservacao_vi/
 │   ├── unidade_conservacao.js  # Model/Serviço da tabela "unidade_conservacao"
 │   └── unidade_municipio.js    # Model da tabela "unidade_municipio" das relações N:M entre Unidade e Município
 ├── public/
-│   ├── index.html              # Página principal servida pelo express através do static
-│   ├── index.js                # Scripts que serão utilizados pela página html de mesmo nome
-│   ├── style.css               # Folha de estilos que será utilizada em todas páginas html
-│   └── ucs.html                # Página que exibe todas as Unidades de Conservação
+│   ├── index.html              # Página principal (lista as Unidades de Conservação), servida pelo express através do static
+│   ├── index.js                # Scripts da página index.html
+│   ├── uc.html                 # Página de detalhe de uma Unidade de Conservação
+│   ├── uc.js                   # Scripts da página uc.html
+│   ├── comunicacoes.html       # Página que lista as Comunicações
+│   ├── comunicacoes.js         # Scripts da página comunicacoes.html
+│   ├── comunicacao.html        # Página de detalhe de uma Comunicação
+│   ├── comunicacao.js          # Scripts da página comunicacao.html
+│   └── style.css               # Folha de estilos que será utilizada em todas páginas html
 ├── routes/
 │   ├── comunicados.js          # Controller de Rotas de Comunicados
 │   ├── index.js                # Agregador de rotas / gerador do Router

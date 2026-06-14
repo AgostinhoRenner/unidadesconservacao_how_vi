@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unidade de Conservação</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/uc.js" defer></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="logo">🌿 ConservaSC</a>
+      <div class="nav-links">
+        <a href="/">Unidades</a>
+        <a href="/comunicacoes.html">Comunicações</a>
+      </div>
+    </nav>
+
+    <a id="nav-prev" class="nav-arrow nav-arrow-left" href="#">&lt;</a>
+    <a id="nav-next" class="nav-arrow nav-arrow-right" href="#">&gt;</a>
+
+    <div id="card-unidade">
+      <img id="unidade-img" src="" alt="Imagem da Unidade" />
+      <h1 id="unidade-nome">Carregando...</h1>
+      <div>
+        <strong>Data de Criação:</strong>
+        <span id="unidade-data"></span>
+      </div>
+
+      <p id="unidade-descricao"></p>
+
+      <div>
+        <strong>Municípios:</strong>
+        <ul id="unidade-municipios"></ul>
+      </div>
+
+      <p class="meta-info">Instituição responsável: <span id="unidade-instituicao"></span></p>
+      <p class="meta-info">Contato: <span id="unidade-email"></span></p>
+
+      <div class="uc-actions">
+        <a id="ver-comunicacoes-link" href="#">Ver comunicações desta unidade</a>
+        <a id="enviar-comunicacao-link" href="#">Enviar comunicação para esta unidade</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>ConservaSC — Projeto acadêmico HOW VI, ADS UNIVALI</p>
+    </footer>
+  </body>
+</html>
